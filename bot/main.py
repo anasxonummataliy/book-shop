@@ -5,9 +5,9 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.types import BotCommand, FSInputFile
 
-from config import BOT_TOKEN, BOT_NAME, BOT_DESCRIPTION, BOT_SHORT_DESCRIPTION, BOT_PHOTO
+from config import BOT_TOKEN, BOT_NAME, BOT_DESCRIPTION, BOT_SHORT_DESCRIPTION
 from database.base import init_db, async_session
-from handlers import start
+from handlers import router as handler
 from middlewares.base import DatabaseMiddleware
 
 
@@ -33,11 +33,11 @@ async def main():
 
     dp.update.middleware(DatabaseMiddleware(async_session))
 
-    dp.include_router(start.router)
+    dp.include_router(handler)
 
     await init_db()
 
-    await set_bot_info(bot)
+    # await set_bot_info(bot)
 
     await dp.start_polling(bot)
 
