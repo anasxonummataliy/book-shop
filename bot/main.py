@@ -3,9 +3,9 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.types import BotCommand
+from aiogram.types import BotCommand, FSInputFile
 
-from config import BOT_TOKEN, BOT_NAME, BOT_DESCRIPTION, BOT_SHORT_DESCRIPTION
+from config import BOT_TOKEN, BOT_NAME, BOT_DESCRIPTION, BOT_SHORT_DESCRIPTION, BOT_PHOTO
 from database.base import init_db, async_session
 from handlers import start
 from middlewares.base import DatabaseMiddleware

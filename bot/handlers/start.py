@@ -54,7 +54,6 @@ async def cmd_start(message: Message, session: AsyncSession):
             reply_markup=main_menu(),
         )
 
-
 @router.message(F.text == "🔙 Orqaga")
 async def back_to_main(message: Message):
     await message.answer("🏠 Bosh menyu", reply_markup=main_menu())
