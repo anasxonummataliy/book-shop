@@ -11,7 +11,6 @@ router = Router()
 
 @router.message(CommandStart())
 async def cmd_start(message: Message, session: AsyncSession):
-    # Referral tekshirish
     args = message.text.split()
     referrer_id = None
     if len(args) > 1:
@@ -20,14 +19,12 @@ async def cmd_start(message: Message, session: AsyncSession):
         except ValueError:
             pass
 
-    # Foydalanuvchini tekshirish
     result = await session.execute(
         select(User).where(User.telegram_id == message.from_user.id)
     )
     user = result.scalar_one_or_none()
 
     if not user:
-        # Yangi foydalanuvchi
         user = User(
             telegram_id=message.from_user.id,
             username=message.from_user.username,
@@ -36,7 +33,6 @@ async def cmd_start(message: Message, session: AsyncSession):
         )
         session.add(user)
 
-        # Referrer uchun count oshirish
         if referrer_id:
             result = await session.execute(
                 select(User).where(User.telegram_id == referrer_id)
