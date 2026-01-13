@@ -18,7 +18,6 @@ class User(Base):
     referral_count: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
-    # Relationship
     orders: Mapped[list["Order"]] = relationship(back_populates="user")
 
 
